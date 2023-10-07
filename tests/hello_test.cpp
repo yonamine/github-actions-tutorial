@@ -1,5 +1,4 @@
 #include <gtest/gtest.h>
-#include <gmock/gmock.h>
 
 TEST(HelloTest, BasicAssertions) {
     EXPECT_STRNE("hello", "world");
