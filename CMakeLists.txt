@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.25)
+cmake_minimum_required(VERSION 3.20)
 
 project(HelloWorld LANGUAGES CXX VERSION 1.0.0 DESCRIPTION "Hello World for Github Actions")
 
