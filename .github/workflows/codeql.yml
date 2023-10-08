@@ -67,6 +67,7 @@ jobs:
       run: |
         echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
         echo "vcpkg-install-root=${VCPKG_INSTALLATION_ROOT}" >> "$GITHUB_OUTPUT"
+        sudo apt install -y ninja-build
 
     - name: Install package dependencies using VCPKG
       run: vcpkg install gtest
