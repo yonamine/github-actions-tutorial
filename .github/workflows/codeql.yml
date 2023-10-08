@@ -43,62 +43,10 @@ jobs:
         # Use only 'java-kotlin' to analyze code written in Java, Kotlin or both
         # Use only 'javascript-typescript' to analyze code written in JavaScript, TypeScript or both
         # Learn more about CodeQL language support at https://aka.ms/codeql-docs/language-support
-        os: [ubuntu-latest, macos-latest, windows-latest]
-        build_type: [Release]
-        build_configuration: [Debug, Release, Dist]
-        include:
-          - os: windows-latest
-            c_compiler: clang
-            cpp_compiler: clang++
-            triplet: x64-windows
-
-          - os: windows-latest
-            c_compiler: cl
-            cpp_compiler: cl
-            triplet: x64-windows
-
-          - os: ubuntu-latest
-            c_compiler: gcc
-            cpp_compiler: g++
-            triplet: x64-linux
-
-          - os: macos-latest
-            c_compiler: clang
-            cpp_compiler: clang++
-            triplet: x64-osx
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
-
-    - name: Set reusable strings
-      # Turn repeated input strings (such as the build output directory) into step outputs.
-      # These step outputs can be used throughout the workflow file.
-      id: strings
-      shell: bash
-      run: |
-        echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
-        echo "vcpkg-install-root=${VCPKG_INSTALLATION_ROOT}" >> "$GITHUB_OUTPUT"
-
-    - name: Add VS toolchain to path on Windows (windows-latest)
-      if: ${{ matrix.os == 'windows-latest' }}
-      uses: ilammy/msvc-dev-cmd@v1
-
-    - name: Install tools with Chocolatey (windows-latest)
-      if: ${{ matrix.os == 'windows-latest' }}
-      run: choco install ninja
-
-    - name: Install tools with apt install (ubuntu-latest)
-      if: ${{ matrix.os == 'ubuntu-latest' }}
-      run: sudo apt install -y ninja-build
-
-    - name: Install tools with brew (macos-latest)
-      if: ${{ matrix.os == 'macos-latest' }}
-      run: brew install ninja
-
-    - name: Install package dependencies using VCPKG
-      run: vcpkg install gtest
-
+      uses: actions/checkout@v3
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
@@ -111,6 +59,7 @@ jobs:
 
         # For more details on CodeQL's query packs, refer to: https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
         # queries: security-extended,security-and-quality
+
 
     # Autobuild attempts to build any compiled languages (C/C++, C#, Go, Java, or Swift).
     # If this step fails, then you should remove it and run the build manually (see below)
