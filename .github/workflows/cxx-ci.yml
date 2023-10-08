@@ -23,9 +23,9 @@ name: C++ CI
 # When the action can run
 on:
   push:
-    branches: [ "main", "dev" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "main", "dev" ]
+    branches: [ "main" ]
 
 env:
   # Configuration type to build.
